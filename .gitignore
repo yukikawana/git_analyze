@@ -1,0 +1,12 @@
+*.ckpt.data-00000-of-00001
+*.ckpt.meta
+*.ckpt.index
+*.ckpt.tar.gz
+*.h5
+*.ckpt*
+*.png
+*.jpg
+*.jpeg
+*.bmp
+*.pgm
+*.caffemodel
