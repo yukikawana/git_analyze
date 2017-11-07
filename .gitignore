@@ -10,3 +10,4 @@
 *.bmp
 *.pgm
 *.caffemodel
+*.npy
