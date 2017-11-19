@@ -3,6 +3,7 @@ from __future__ import division
 
 import numpy as np
 from tensorflow.contrib.keras import backend as K
+import tensorflow as tf
 
 from .losses import Loss
 from .utils import utils
@@ -87,9 +88,6 @@ class LPNorm(Loss):
         added soft and hard constraint
         """
         super(LPNorm, self).__init__()
-        if p < 1:
-            raise ValueError('p value should range between [1, inf)')
-        self.name = "L-{} Norm Loss".format(p)
         self.alpha = alpha
         self.img = img_input
         self.B = B
@@ -97,12 +95,13 @@ class LPNorm(Loss):
 
     def build_loss(self):
         # Infinity norm
-        if np.isinf(self.p):
 
-            value = K.max(self.img)
-        else:
-            value = K.pow(K.sum(K.pow(self.img, self.alpha)), self.alpha/2.)
+        value = K.pow(K.sum(K.pow(self.img, self.alpha)), self.alpha/2.)
 
         
+        print "img shape",self.img.shape
         N = normalize(self.img, value, self.B)
-        if tf.all(tf.where(tf.sqrt(tf.reduce_sum(tf.pow(self.img,2),axis=3))<self.Bp,1,0),1)
+        po = K.pow(self.img, 2)
+        su = K.sum(po, axis=3)
+        print po, su
+        return K.switch(K.all(K.sqrt(su)<self.Bp), N, np.inf)

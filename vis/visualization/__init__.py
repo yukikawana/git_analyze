@@ -5,6 +5,8 @@ from .activation_maximization import visualize_activation_with_losses
 from .activation_maximization import visualize_activation
 from .activation_maximization_tf import visualize_activation_with_losses_tf
 from .activation_maximization_tf import visualize_activation_tf
+from .activation_maximization_nnpreimage import visualize_activation_with_losses_tf
+from .activation_maximization_nnpreimage import visualize_activation_tf
 
 from .saliency import visualize_saliency_with_losses
 from .saliency import visualize_saliency

@@ -51,8 +51,8 @@ idxs =[89,137,71,211,160,181,63,231,155,117]
 top = 10
 idx = 1
 name = 'conv4_2'
-name = 'conv5_1'
 name = 'conv3_3_D'
+name = 'conv5_3'
 obj = 9
 
 # Create tensorflow graph for evaluation
@@ -127,6 +127,7 @@ with tf.Session(graph=eval_graph) as sess:
 print 'visualize done'
 
 #visualizing part    
+"""
 inputs = tf.placeholder("float", [batch_size, input_shape[0], input_shape[1], 3])
 vislogits, visend_points = segnet(inputs)
 sess = tf.Session()
@@ -138,4 +139,5 @@ img = get_img(indices_value[idx], name)
 print img
 print indices_value[idx], name
 Image.fromarray(np.uint8(img)).save('vised/{}_{}.png'.format(name,indices_value[idx]))
+"""
 

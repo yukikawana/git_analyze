@@ -14,6 +14,7 @@ from vis.visualization import visualize_activation
 from vis.input_modifiers import Jitter
 import sys, os
 import tensorflow.contrib.slim as slim
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
  #define input shape
 input_shape = (360, 480)
 
@@ -34,8 +35,8 @@ name = 'relu_2'
 name = 'conv4_2'
 name = 'relu5_3'
 name = 'conv2_1_D'
-name = 'conv5_3'
 name = 'relu5_3'
+name = 'conv5_3'
 idx =8
 #img = visualize_activation_tf(inputs,end_points,name, filter_indices=idx, tv_weight=.0,lp_norm_weight=0., input_modifiers=[Jitter(0.05)])
 #img = visualize_activation_tf(inputs,end_points,name, filter_indices=idx, max_iter=1800, act_max_weight=0.1,tv_weight=0.01,lp_norm_weight=10000, input_modifiers=[Jitter(16)], verbose=True)
@@ -65,8 +66,10 @@ print grads_val.shape
 weights = np.mean(grads_val, axis = (0, 1, 2)) 			# [512]
 print weights.shape
 idxs = np.argsort(weights)[::-1]
+print idxs
 idx = idxs[0]
 print idx, name
+"""
 def get_img(idx, name):
     img = visualize_activation_tf(inputs,end_points,name, filter_indices=idx, tv_weight=.0,lp_norm_weight=10., input_modifiers=[Jitter(0.05)],max_iter=200, verbose=True)
     img = visualize_activation_tf(inputs,end_points,name, seed_input=img,filter_indices=idx, max_iter=600, act_max_weight=1.,tv_weight=0.01,lp_norm_weight=10, input_modifiers=[Jitter(16)], verbose=True)
@@ -79,4 +82,5 @@ idx = idxs[1]
 print idx, name
 img = get_img(idx, name)
 Image.fromarray(np.uint8(img)).save('{}_{}.png'.format(name,idx))
+"""
  

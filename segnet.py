@@ -90,6 +90,7 @@ def segnet(inputs):
     end_points['relu5_3'] = net
     net, arg5 = tf.nn.max_pool_with_argmax(net, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME', name='pool5')
     end_points['pool5'] = net
+    #net = unpool_with_argmax(net, arg5, name='unpool5',upsample=[30,23])
     net = unpool_with_argmax(net, arg5, name='unpool5',upsample=[30,23])
     end_points['unpool5'] = net
     net = conv(net,3, 3, 512, 1, 1, relu=False, name='conv5_3_D')
